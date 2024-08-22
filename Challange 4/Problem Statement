@@ -1,0 +1,71 @@
+
+### 📝 Problem Statement: Build a Highly Available Redis Cluster
+
+#### 🎯 Objective
+
+Build a highly available Redis cluster based on the provided specifications.
+
+#### 📋 Specifications
+
+1. **ConfigMap**
+   - **Name**: `redis-cluster-configmap` (Inspect its configuration.)
+
+2. **Service**
+   - **Name**: `redis-cluster-service`
+   - **Ports**:
+     - **client**: Port `6379`, TargetPort `6379`
+     - **gossip**: Port `16379`, TargetPort `16379`
+
+3. **StatefulSet**
+   - **Name**: `redis-cluster`
+   - **Replicas**: `6`
+   - **Image**: `redis:5.0.1-alpine`
+   - **Label**: `app: redis-cluster`
+   - **Container Name**: `redis`
+   - **Command**: `["/conf/update-node.sh", "redis-server", "/conf/redis.conf"]`
+   - **Ports**:
+     - **client**: `6379`
+     - **gossip**: `16379`
+   - **Volume Mounts**:
+     - **conf**: MountPath `/conf`
+     - **data**: MountPath `/data`
+   - **Volumes**:
+     - **conf**: ConfigMap `redis-cluster-configmap`, DefaultMode `0755`
+   - **VolumeClaimTemplates**:
+     - **Name**: `data`
+     - **AccessModes**: `ReadWriteOnce`
+     - **Storage Request**: `1Gi`
+
+4. **PersistentVolumes**
+   - **Names**: `redis01`, `redis02`, `redis03`, `redis04`, `redis05`, `redis06`
+   - **Access Modes**: `ReadWriteOnce`
+   - **Size**: `1Gi`
+   - **HostPaths**:
+     - `/redis01`, `/redis02`, `/redis03`, `/redis04`, `/redis05`, `/redis06`
+
+5. **Redis Cluster Initialization Command**
+   - **Command**:
+
+     ```bash
+     kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replicas 1 $(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 {end}')
+     ```
+
+#### 📦 Deliverables
+
+1. **Kubernetes Configuration Files**:
+   - StatefulSet YAML
+   - Service YAML
+   - PersistentVolume YAMLs
+
+2. **Deployment Script**: Automate the creation of resources.
+
+3. **Verification**: Ensure all pods are running and the Redis cluster is initialized.
+
+#### 📝 Notes
+
+- Ensure PersistentVolume directories exist on worker nodes.
+- Verify Redis cluster initialization.
+
+Good luck with your Redis cluster deployment! 🚀
+
+---

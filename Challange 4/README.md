@@ -1,55 +1,163 @@
 # Kubernetes Challenge 4: Highly Available Redis Cluster 🚀
 
-Welcome to the Kubernetes Challenge 4 repository! In this challenge, you’ll build a highly available Redis cluster using Kubernetes. Follow the instructions below to set up and verify your Redis cluster.
+## Overview
 
-## 🎯 Objective
+This guide details the process for deploying a highly available Redis cluster on a Kubernetes cluster. It includes setting up Kubernetes resources such as ConfigMap, Service, StatefulSet, PersistentVolume, and PersistentVolumeClaim, as well as initializing the Redis cluster.
 
-Build a highly available Redis cluster based on the provided specifications.
+## 🎯 Challenge Instructions
 
-## 📋 Specifications
+You are tasked with setting up a highly available Redis cluster using Kubernetes. Your task involves setting up the required Kubernetes resources, including ConfigMap, Service, StatefulSet, PersistentVolume, and PersistentVolumeClaim. Additionally, you need to initialize the Redis cluster. Here’s a detailed breakdown of what needs to be done:
 
-### ConfigMap
+1. **ConfigMap Setup:**
+   - **Name:** `redis-cluster-configmap`
+   - **Purpose:** This ConfigMap holds the Redis configuration data. Inspect and verify the configuration settings.
 
-- **Name**: `redis-cluster-configmap`
-  - **Purpose**: Holds the configuration data for Redis.
+2. **Service Configuration:**
+   - **Name:** `redis-cluster-service`
+   - **Ports:**
+     - **Client:** Port `6379`, TargetPort `6379`
+     - **Gossip:** Port `16379`, TargetPort `16379`
+   - **Purpose:** This service exposes the Redis cluster to other services and clients. Ensure it routes traffic correctly.
 
-### Service
+3. **StatefulSet Deployment:**
+   - **Name:** `redis-cluster`
+   - **Replicas:** `6`
+   - **Image:** `redis:5.0.1-alpine`
+   - **Label:** `app: redis-cluster`
+   - **Container Name:** `redis`
+   - **Command:** `["/conf/update-node.sh", "redis-server", "/conf/redis.conf"]`
+   - **Ports:**
+     - **Client:** `6379`
+     - **Gossip:** `16379`
+   - **Volume Mounts:**
+     - **Conf:** MountPath `/conf`
+     - **Data:** MountPath `/data`
+   - **Volumes:**
+     - **Conf:** Use ConfigMap `redis-cluster-configmap`, DefaultMode `0755`
+   - **VolumeClaimTemplates:**
+     - **Name:** `data`
+     - **AccessModes:** `ReadWriteOnce`
+     - **Storage Request:** `1Gi`
+   - **Purpose:** Deploy the Redis instances with persistent storage and appropriate configurations.
 
-- **Name**: `redis-cluster-service`
-- **Ports**:
-  - **Client**: Port `6379`, TargetPort `6379`
-  - **Gossip**: Port `16379`, TargetPort `16379`
+4. **PersistentVolume Configuration:**
+   - **Names:** `redis01`, `redis02`, `redis03`, `redis04`, `redis05`, `redis06`
+   - **Access Modes:** `ReadWriteOnce`
+   - **Size:** `1Gi`
+   - **HostPaths:**
+     - `/redis01`, `/redis02`, `/redis03`, `/redis04`, `/redis05`, `/redis06`
+   - **Purpose:** Provide persistent storage for Redis data. Ensure these paths exist on your worker nodes.
 
-### StatefulSet
+5. **Redis Cluster Initialization:**
+   - **Command:**
 
-- **Name**: `redis-cluster`
-- **Replicas**: `6`
-- **Image**: `redis:5.0.1-alpine`
-- **Label**: `app: redis-cluster`
-- **Container Name**: `redis`
-- **Command**: `["/conf/update-node.sh", "redis-server", "/conf/redis.conf"]`
-- **Ports**:
-  - **Client**: `6379`
-  - **Gossip**: `16379`
-- **Volume Mounts**:
-  - **Conf**: MountPath `/conf`
-  - **Data**: MountPath `/data`
-- **Volumes**:
-  - **Conf**: ConfigMap `redis-cluster-configmap`, DefaultMode `0755`
-- **VolumeClaimTemplates**:
-  - **Name**: `data`
-  - **AccessModes**: `ReadWriteOnce`
-  - **Storage Request**: `1Gi`
+     ```bash
+     kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replicas 1 $(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 {end}')
+     ```
 
-### PersistentVolumes
+   - **Purpose:** Initialize the Redis cluster with the specified replicas. Ensure that all Redis nodes are correctly connected and form a cluster.
 
-- **Names**: `redis01`, `redis02`, `redis03`, `redis04`, `redis05`, `redis06`
-- **Access Modes**: `ReadWriteOnce`
-- **Size**: `1Gi`
-- **HostPaths**:
-  - `/redis01`, `/redis02`, `/redis03`, `/redis04`, `/redis05`, `/redis06`
+## 🛠️ Prerequisites
 
-### Redis Cluster Initialization Command
+- **Kubernetes Cluster:** Ensure you have access to a running Kubernetes cluster.
+- **`kubectl`**: The command-line tool should be installed and configured.
+
+---
+
+## 🧑‍💻 Setup Instructions
+
+### 1. ConfigMap Setup
+
+Create a file named `redis-cluster-configmap.yaml` with the Redis configuration.
+
+<details>
+<summary>File Path</summary>
+
+- [redis-cluster-configmap.yaml](https://github.com/your-repo/redis-cluster-configmap.yaml)
+
+</details>
+
+Apply the ConfigMap definition:
+
+<details>
+<summary>Command</summary>
+
+```bash
+kubectl apply -f redis-cluster-configmap.yaml
+```
+
+</details>
+
+### 2. Service Configuration
+
+Create a file named `redis-cluster-service.yaml` with the service definition.
+
+<details>
+<summary>File Path</summary>
+
+- [redis-cluster-service.yaml](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%204/redis-cluster-service.yaml)
+
+</details>
+
+Apply the Service definition:
+
+<details>
+<summary>Command</summary>
+
+```bash
+kubectl apply -f redis-cluster-service.yaml
+```
+
+</details>
+
+### 3. StatefulSet Deployment
+
+Create a file named `redis-cluster-statefulset.yaml` with the StatefulSet definition.
+
+<details>
+<summary>File Path</summary>
+
+- [redis-cluster-statefulset.yaml](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%204/redis-cluster-statefulset.yaml)
+
+</details>
+
+Apply the StatefulSet definition:
+
+<details>
+<summary>Command</summary>
+
+```bash
+kubectl apply -f redis-cluster-statefulset.yaml
+```
+
+</details>
+
+### 4. PersistentVolume Configuration
+
+Create PersistentVolumes using the `generate-pv.sh` script.
+
+<details>
+<summary>File Path</summary>
+
+- [generate-pv.sh](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%204/generate-pv.sh)
+
+</details>
+
+Run the script to create PersistentVolumes:
+
+<details>
+<summary>Command</summary>
+
+```bash
+chmod +x generate-pv.sh
+./generate-pv.sh
+```
+
+</details>
+
+### 5. Redis Cluster Initialization
+
+Initialize the Redis cluster with the provided command:
 
 <details>
 <summary>Command</summary>
@@ -60,123 +168,46 @@ kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replica
 
 </details>
 
-## 🗂️ Files in This Repository
+### 6. Verify the Deployment
 
-- **`statefulset.yaml`**: StatefulSet configuration for the Redis cluster.
-- **`service.yaml`**: Service configuration to expose the Redis cluster.
-- **`persistentvolumes.yaml`**: PersistentVolume configurations.
-- **`configmap.yaml`**: Configures Redis settings.
-- **`deploy.sh`**: Deployment script to automate the creation of resources.
-- **`README.md`**: This file, providing challenge details and instructions.
+Check the status of the Redis pods and services to ensure they are running correctly:
 
-## 🚀 Getting Started
+<details>
+<summary>Commands</summary>
 
-### Prerequisites
+```bash
+kubectl get pods
+kubectl get services
+```
 
-- **Kubernetes Cluster**: Ensure you have a running Kubernetes cluster.
-- **kubectl**: Install `kubectl` and configure it to interact with your Kubernetes cluster.
+</details>
 
-### Setup Instructions
+### 7. Verify Redis Cluster Initialization
 
-1. **Clone the Repository**
+Confirm that the Redis cluster is properly initialized:
 
-   <details>
-   <summary>Command</summary>
+<details>
+<summary>Command</summary>
 
-   ```bash
-   git clone https://github.com/prudvikeshav/Kubernetes-Challenges.git
-   cd Kubernetes-Challenges/Challenge-4
-   ```
+```bash
+kubectl exec -it redis-cluster-0 -- redis-cli cluster info
+```
 
-   </details>
-
-2. **Deploy the Redis Cluster**
-
-   Apply the Kubernetes manifests to set up the Redis cluster:
-
-   <details>
-   <summary>Commands</summary>
-
-   ```bash
-   kubectl apply -f configmap.yaml
-   kubectl apply -f service.yaml
-   kubectl apply -f persistentvolumes.yaml
-   kubectl apply -f statefulset.yaml
-   ```
-
-   </details>
-
-3. **Run the Deployment Script**
-
-   Make the deployment script executable and run it:
-
-   <details>
-   <summary>Commands</summary>
-
-   ```bash
-   chmod +x deploy.sh
-   ./deploy.sh
-   ```
-
-   </details>
-
-4. **Verify the Deployment**
-
-   Check the status of the Redis pods and services:
-
-   <details>
-   <summary>Commands</summary>
-
-   ```bash
-   kubectl get pods
-   kubectl get services
-   ```
-
-   </details>
-
-5. **Initialize the Redis Cluster**
-
-   Execute the following command to initialize the Redis cluster:
-
-   <details>
-   <summary>Command</summary>
-
-   ```bash
-   kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replicas 1 $(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 {end}')
-   ```
-
-   </details>
-
-6. **Verify Redis Cluster Initialization**
-
-   Confirm that the Redis cluster is properly initialized:
-
-   <details>
-   <summary>Command</summary>
-
-   ```bash
-   kubectl exec -it redis-cluster-0 -- redis-cli cluster info
-   ```
-
-   </details>
+</details>
 
 ## 📦 Deliverables
 
-1. **Kubernetes Configuration Files**: Ensure that the StatefulSet, Service, and PersistentVolume YAML files are correctly implemented.
-2. **Deployment Script**: `deploy.sh` automates the creation of resources.
-3. **Verification**: Confirm that all pods are running and the Redis cluster is properly initialized.
+1. **Kubernetes Configuration Files:** Ensure the StatefulSet, Service, and PersistentVolume YAML files are correctly implemented.
+2. **PersistentVolume Script:** `generate-pv.sh` for creating PersistentVolumes.
+3. **Verification:** Confirm that all pods are running and the Redis cluster is properly initialized.
 
-## 📝 Notes
-
-- Ensure that the PersistentVolume directories (`/redis01`, `/redis02`, etc.) exist on the worker nodes.
-- Verify the Redis cluster's status and health using `redis-cli`.
-
-Good luck with your Redis cluster deployment! 🚀
-
-## License
+## 📜 License
 
 This project is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for details.
 
-## Contact
+## 📞 Contact
 
 For questions or issues, please open an issue on the repository or contact [Your Name] at [Your Email Address].
+
+Good luck with your Redis cluster deployment! 🚀
+

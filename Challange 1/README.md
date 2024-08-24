@@ -1,19 +1,18 @@
-
-# Jekyll Static Site Generator Deployment on Kubernetes
+# Jekyll Static Site Generator Deployment on Kubernetes 🚀
 
 ## Overview
 
-This guide describes how to deploy a Jekyll Static Site Generator (SSG) on a Kubernetes cluster. The deployment includes setting up Kubernetes resources such as PersistentVolume (PV), PersistentVolumeClaim (PVC), Pod, and Service, and configuring user permissions and contexts in the kubeconfig file.
+This guide describes how to deploy a Jekyll Static Site Generator (SSG) on a Kubernetes cluster. The deployment includes setting up Kubernetes resources such as PersistentVolume (PV), PersistentVolumeClaim (PVC), Pod, and Service, as well as configuring user permissions and contexts in the kubeconfig file.
 
-## Prerequisites
+## 🛠️ Prerequisites
 
-- Kubernetes cluster access
-- `kubectl` command-line tool installed and configured
-- Access to a kubeconfig file
+- **Kubernetes Cluster**: Ensure you have access to a running Kubernetes cluster.
+- **`kubectl`**: The command-line tool should be installed and configured.
+- **Kubeconfig File**: Access to a kubeconfig file is required.
 
 ---
 
-## User and Context Configuration
+## 🧑‍💻 User and Context Configuration
 
 ### 1. User Configuration
 
@@ -44,28 +43,16 @@ kubectl config use-context developer
 
 ---
 
-## PersistentVolumeClaim (PVC) Setup
+## 📦 PersistentVolumeClaim (PVC) Setup
 
 ### 1. Define PersistentVolumeClaim
 
 Create a file named `jekyll-pvc.yaml` with the following content:
 
 <details>
-<summary>File Content</summary>
+<summary>File Path</summary>
 
-```yaml
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jekyll-site
-  namespace: development
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Gi
-```
+- `jekyll-pvc.yaml`
 
 </details>
 
@@ -93,42 +80,16 @@ kubectl get pvc -n development
 
 ---
 
-## Pod Configuration
+## 🛠️ Pod Configuration
 
 ### 1. Define Pod
 
 Create a file named `jekyll-pod.yaml` with the following content:
 
 <details>
-<summary>File Content</summary>
+<summary>File Path</summary>
 
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: jekyll
-  namespace: development
-  labels:
-    run: jekyll
-spec:
-  volumes:
-    - name: site
-      persistentVolumeClaim:
-        claimName: jekyll-site
-  initContainers:
-    - name: copy-jekyll-site
-      image: gcr.io/kodekloud/customimage/jekyll
-      command: ["jekyll", "new", "/site"]
-      volumeMounts:
-        - name: site
-          mountPath: /site
-  containers:
-    - name: jekyll
-      image: gcr.io/kodekloud/customimage/jekyll-serve
-      volumeMounts:
-        - name: site
-          mountPath: /site
-```
+- `jekyll-pod.yaml`
 
 </details>
 
@@ -145,30 +106,16 @@ kubectl apply -f jekyll-pod.yaml
 
 ---
 
-## Service Configuration
+## 🌐 Service Configuration
 
 ### 1. Define Service
 
 Create a file named `jekyll-service.yaml` with the following content:
 
 <details>
-<summary>File Content</summary>
+<summary>File Path</summary>
 
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: jekyll
-  namespace: development
-spec:
-  ports:
-    - port: 8080
-      targetPort: 4000
-      nodePort: 30097
-  selector:
-    run: jekyll
-  type: NodePort
-```
+- `jekyll-service.yaml`
 
 </details>
 
@@ -185,26 +132,16 @@ kubectl apply -f jekyll-service.yaml
 
 ---
 
-## Role and RoleBinding Configuration
+## 🔐 Role and RoleBinding Configuration
 
 ### 1. Define Role
 
 Create a file named `developer-role.yaml` with the following content:
 
 <details>
-<summary>File Content</summary>
+<summary>File Path</summary>
 
-```yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: developer-role
-  namespace: development
-rules:
-  - apiGroups: [""]
-    resources: ["services", "persistentvolumeclaims", "pods"]
-    verbs: ["*"]
-```
+- `developer-role.yaml`
 
 </details>
 
@@ -213,23 +150,9 @@ rules:
 Create a file named `developer-rolebinding.yaml` with the following content:
 
 <details>
-<summary>File Content</summary>
+<summary>File Path</summary>
 
-```yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: developer-rolebinding
-  namespace: development
-subjects:
-  - kind: User
-    name: martin
-    apiGroup: rbac.authorization.k8s.io
-roleRef:
-  kind: Role
-  name: developer-role
-  apiGroup: rbac.authorization.k8s.io
-```
+- `developer-rolebinding.yaml`
 
 </details>
 
@@ -247,7 +170,7 @@ kubectl apply -f developer-rolebinding.yaml
 
 ---
 
-## Verification
+## ✅ Verification
 
 1. **Verify PVC Binding:**
 
@@ -299,6 +222,20 @@ kubectl apply -f developer-rolebinding.yaml
 
 ---
 
-## Summary
+## 📋 Summary
 
-You have successfully deployed a Jekyll Static Site Generator on Kubernetes. The deployment includes a PersistentVolumeClaim, Pod, and Service, with proper user permissions and role bindings configured.
+You have successfully deployed a Jekyll Static Site Generator on Kubernetes. The deployment includes:
+
+- **PersistentVolumeClaim**: `jekyll-site`
+- **Pod**: Configured with Jekyll image and service
+- **Service**: Exposed on NodePort `30097`
+- **Role and RoleBinding**: For user permissions and access control
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for details.
+
+## 📞 Contact
+
+For questions or issues, please open an issue on the repository or contact [Your Name] at [Your Email Address].
+

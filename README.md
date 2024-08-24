@@ -9,24 +9,33 @@ The Kubernetes Challenges are a **FREE** set of engaging tasks to enhance your K
 
 ## Challenges
 
+
 <details>
-  <summary>Challenge 1: Deploy a Simple Application</summary>
-  <!-- Add the specific details or instructions for Challenge 1 here -->
+<summary>Challange 1: Jekyll Static Site Generator Deployment on Kubernetes</summary>
+
+- [Jekyll Static Site Generator Deployment on Kubernetes](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/main/Challange%201)
+
 </details>
 
 <details>
-  <summary>Challenge 2: Troubleshoot Application Issues</summary>
-  <!-- Add the specific details or instructions for Challenge 2 here -->
+<summary>Challange 2</summary>
+
+- [Challange 2](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/main/Challange%202)
+
 </details>
 
 <details>
-  <summary>Challenge 3: Fix Security Vulnerabilities</summary>
-  <!-- Add the specific details or instructions for Challenge 3 here -->
+<summary>Challange 3</summary>
+
+- [Challange 3](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/main/Challange%203)
+
 </details>
 
 <details>
-  <summary>Challenge 4: Build Redis Cluster</summary>
-  [ Challenge 4 .](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/main/Challange%204)
+<summary>Challenge 4: Build Redis Cluster</summary>
+
+- [Build Redis Cluster](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/main/Challange%204)
+
 </details>
 
 ## Getting Started

@@ -97,7 +97,7 @@ Your task is to fix the Kubernetes cluster and deploy the required resources to 
 
    - **PersistentVolume [`data-pv.yml`](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%202/data-pv.yaml)**
 
-   - **PersistentVolumeClaim (`data-pvc.yml`](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%202/data-pvc.yaml)**
+   - **PersistentVolumeClaim [`data-pvc.yml`](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%202/data-pvc.yaml)**
 
    ```bash
    kubectl apply -f pv.yml
@@ -109,7 +109,7 @@ Your task is to fix the Kubernetes cluster and deploy the required resources to 
 1. **Deploy the Service:**
    - Create the service definition.
 
-   - **Service (`gop-fs-service.yml`](https://github.com/your-repo/image-gallery-service/blob/main/service.yml)**
+   - **Service [`gop-fs-service.yml`](https://github.com/your-repo/image-gallery-service/blob/main/service.yml)**
 
    ```bash
    kubectl apply -f service.yml
@@ -118,7 +118,7 @@ Your task is to fix the Kubernetes cluster and deploy the required resources to 
 2. **Deploy the Pod:**
    - Create the pod definition.
 
-   - **Pod (`gop-file-server.yml`](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%202/gop-file-server.yaml)**
+   - **Pod [`gop-file-server.yml`](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%202/gop-file-server.yaml)**
 
    ```bash
    kubectl apply -f pod.yml

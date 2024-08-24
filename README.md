@@ -11,14 +11,14 @@ The Kubernetes Challenges are a **FREE** set of engaging tasks to enhance your K
 
 
 <details>
-<summary>Challange 1: Jekyll Static Site Generator Deployment on Kubernetes</summary>
+<summary>Challange 1</summary>
 
 - [Jekyll Static Site Generator Deployment on Kubernetes](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/main/Challange%201)
 
 </details>
 
 <details>
-<summary>Troubleshooting 2-node Kubernetes cluster and deploy an image gallery</summary>
+<summary>Challenge 2</summary>
 
 - [Troubleshooting 2-node Kubernetes cluster and deploy an image gallery](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/main/Challange%202)
 
@@ -32,7 +32,7 @@ The Kubernetes Challenges are a **FREE** set of engaging tasks to enhance your K
 </details>
 
 <details>
-<summary>Challenge 4: Build Redis Cluster</summary>
+<summary>Challenge 4</summary>
 
 - [Build Redis Cluster](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/main/Challange%204)
 

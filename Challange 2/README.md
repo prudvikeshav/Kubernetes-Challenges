@@ -95,11 +95,9 @@ Your task is to fix the Kubernetes cluster and deploy the required resources to 
 2. **Create PersistentVolume and PersistentVolumeClaim:**
    - Apply configurations for PersistentVolume and PersistentVolumeClaim.
 
-   - **PersistentVolume (`pv.yml`):**
-     - [`data-pv.yml`](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%202/data-pv.yaml)
+   - **PersistentVolume [`data-pv.yml`](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%202/data-pv.yaml)**
 
-   - **PersistentVolumeClaim (`pvc.yml`):**
-     - [`data-pvc.yml`](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%202/data-pvc.yaml)
+   - **PersistentVolumeClaim (`data-pvc.yml`](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%202/data-pvc.yaml)**
 
    ```bash
    kubectl apply -f pv.yml
@@ -111,8 +109,7 @@ Your task is to fix the Kubernetes cluster and deploy the required resources to 
 1. **Deploy the Service:**
    - Create the service definition.
 
-   - **Service (`service.yml`):**
-     - [`gop-fs-service.yml`](https://github.com/your-repo/image-gallery-service/blob/main/service.yml)
+   - **Service (`gop-fs-service.yml`](https://github.com/your-repo/image-gallery-service/blob/main/service.yml)**
 
    ```bash
    kubectl apply -f service.yml
@@ -121,8 +118,7 @@ Your task is to fix the Kubernetes cluster and deploy the required resources to 
 2. **Deploy the Pod:**
    - Create the pod definition.
 
-   - **Pod (`pod.yml`):**
-     - [`gop-file-server.yml`](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%202/gop-file-server.yaml)
+   - **Pod (`gop-file-server.yml`](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%202/gop-file-server.yaml)**
 
    ```bash
    kubectl apply -f pod.yml
@@ -141,10 +137,10 @@ Your task is to fix the Kubernetes cluster and deploy the required resources to 
 ## 📦 Deliverables
 
 1. **Kubernetes Configuration Files:**
-   - PersistentVolume (`pv.yml`)
-   - PersistentVolumeClaim (`pvc.yml`)
-   - Service (`service.yml`)
-   - Pod (`pod.yml`)
+   - PersistentVolume (`data-pv.yml`)
+   - PersistentVolumeClaim (`data-pvc.yml`)
+   - Service (`gop-fs-service.yml`)
+   - Pod (`gop-file-server.yml`)
 
 2. **Verification:**
    - Confirm that all pods and services are running as expected.

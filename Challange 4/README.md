@@ -1,8 +1,6 @@
-
-
 # Kubernetes Challenge 4: Highly Available Redis Cluster 🚀
 
-Welcome to the Kubernetes Challenge 4 repository! In this challenge, you'll build a highly available Redis cluster using Kubernetes. Follow the instructions below to set up and verify your Redis cluster.
+Welcome to the Kubernetes Challenge 4 repository! In this challenge, you’ll build a highly available Redis cluster using Kubernetes. Follow the instructions below to set up and verify your Redis cluster.
 
 ## 🎯 Objective
 
@@ -53,9 +51,14 @@ Build a highly available Redis cluster based on the provided specifications.
 
 ### Redis Cluster Initialization Command
 
+<details>
+<summary>Command</summary>
+
 ```bash
 kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replicas 1 $(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 {end}')
 ```
+
+</details>
 
 ## 🗂️ Files in This Repository
 
@@ -77,14 +80,22 @@ kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replica
 
 1. **Clone the Repository**
 
+   <details>
+   <summary>Command</summary>
+
    ```bash
    git clone https://github.com/prudvikeshav/Kubernetes-Challenges.git
    cd Kubernetes-Challenges/Challenge-4
    ```
 
+   </details>
+
 2. **Deploy the Redis Cluster**
 
    Apply the Kubernetes manifests to set up the Redis cluster:
+
+   <details>
+   <summary>Commands</summary>
 
    ```bash
    kubectl apply -f configmap.yaml
@@ -93,39 +104,61 @@ kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replica
    kubectl apply -f statefulset.yaml
    ```
 
+   </details>
+
 3. **Run the Deployment Script**
 
    Make the deployment script executable and run it:
+
+   <details>
+   <summary>Commands</summary>
 
    ```bash
    chmod +x deploy.sh
    ./deploy.sh
    ```
 
+   </details>
+
 4. **Verify the Deployment**
 
    Check the status of the Redis pods and services:
+
+   <details>
+   <summary>Commands</summary>
 
    ```bash
    kubectl get pods
    kubectl get services
    ```
 
+   </details>
+
 5. **Initialize the Redis Cluster**
 
    Execute the following command to initialize the Redis cluster:
+
+   <details>
+   <summary>Command</summary>
 
    ```bash
    kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replicas 1 $(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 {end}')
    ```
 
+   </details>
+
 6. **Verify Redis Cluster Initialization**
 
    Confirm that the Redis cluster is properly initialized:
 
+   <details>
+   <summary>Command</summary>
+
    ```bash
    kubectl exec -it redis-cluster-0 -- redis-cli cluster info
    ```
+
+   </details>
 
 ## 📦 Deliverables
 
@@ -147,4 +180,3 @@ This project is licensed under the [MIT License](LICENSE). See the [LICENSE](LIC
 ## Contact
 
 For questions or issues, please open an issue on the repository or contact [Your Name] at [Your Email Address].
-

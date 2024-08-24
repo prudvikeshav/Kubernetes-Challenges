@@ -107,7 +107,7 @@ Create a file named `jekyll-pvc.yaml` with the following content:
 <details>
 <summary>File Path</summary>
 
-- `jekyll-pvc.yaml`
+- [jekyll-pvc.yaml](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%201/jekyll-pvc.yaml)
 
 </details>
 
@@ -144,7 +144,7 @@ Create a file named `jekyll-pod.yaml` with the following content:
 <details>
 <summary>File Path</summary>
 
-- `jekyll-pod.yaml`
+- [jekyll-pod.yaml](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%201/jekyll-pod.yaml)
 
 </details>
 
@@ -170,7 +170,7 @@ Create a file named `jekyll-service.yaml` with the following content:
 <details>
 <summary>File Path</summary>
 
-- `jekyll-service.yaml`
+- [jekyll-service.yaml](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%201/jekyll-service.yaml)
 
 </details>
 
@@ -196,7 +196,7 @@ Create a file named `developer-role.yaml` with the following content:
 <details>
 <summary>File Path</summary>
 
-- `developer-role.yaml`
+- [developer-role.yaml](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%201/developer-role.yaml)
 
 </details>
 
@@ -207,7 +207,7 @@ Create a file named `developer-rolebinding.yaml` with the following content:
 <details>
 <summary>File Path</summary>
 
-- `developer-rolebinding.yaml`
+- [developer-rolebinding.yaml](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/work/Challange%201/developer-rolebinding.yaml)
 
 </details>
 

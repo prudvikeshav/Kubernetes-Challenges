@@ -18,9 +18,9 @@ The Kubernetes Challenges are a **FREE** set of engaging tasks to enhance your K
 </details>
 
 <details>
-<summary>Challange 2</summary>
+<summary>Troubleshooting Cluster</summary>
 
-- [Challange 2](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/main/Challange%202)
+- [Troubleshooting Cluster](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/main/Challange%202)
 
 </details>
 

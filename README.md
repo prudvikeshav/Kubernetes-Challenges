@@ -27,7 +27,7 @@ The Kubernetes Challenges are a **FREE** set of engaging tasks to enhance your K
 <details>
 <summary>Challange 3</summary>
 
-- [Challange 3](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/main/Challange%203)
+- [Voting Portal Deployment on Kubernetes](https://github.com/prudvikeshav/Kubernetes-Challenges/blob/main/Challange%203)
 
 </details>
 

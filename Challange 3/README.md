@@ -1,4 +1,4 @@
-# Voting Portal Deployment on Kubernetes 🚀
+# Kubernetes Challenge 3: Voting Portal Deployment on Kubernetes 🚀
 
 ## Overview
 

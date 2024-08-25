@@ -52,7 +52,7 @@ To get started with the challenges, follow these steps:
    Each challenge is contained within its own directory. Navigate to the appropriate directory for detailed instructions.
 
    ```bash
-   cd Kubernetes-Challenges/challenge-1
+   cd Kubernetes-Challenges/Challenge 1
    ```
 
 3. **Follow the Instructions:**

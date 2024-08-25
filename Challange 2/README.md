@@ -1,5 +1,5 @@
 
-# Kubernetes Challenge: Image Gallery Service Deployment 🚀
+# Kubernetes Challenge 2 : Troubleshooting 2-node Kubernetes cluster and deploy an image gallery 🚀
 
 ## Overview
 

@@ -2,14 +2,14 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-
- 
   name: gop-fs-service
 spec:
   ports:
     - port: 8080
       targetPort: 8080
-      
   selector:
+<<<<<<< HEAD
         run: gop
+=======
+>>>>>>> 5723e2b5acb4ab84cf8711853f64bf5fac2466a3
   type:  ClusterIP

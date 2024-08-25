@@ -1,5 +1,5 @@
 
-# Kubernetes Challenge: Troubleshooting 2-node Kubernetes cluster and deploy an image gallery 🚀
+# Kubernetes Challenge 2 : Troubleshooting 2-node Kubernetes cluster and deploy an image gallery 🚀
 
 ## Overview
 

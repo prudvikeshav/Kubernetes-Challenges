@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: gop-file-server
   labels:
-    run: jekyl
+    run: gop
 spec:
   containers:
   -  name: gop-file-server

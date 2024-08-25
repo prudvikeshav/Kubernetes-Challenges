@@ -201,13 +201,3 @@ kubectl exec -it redis-cluster-0 -- redis-cli cluster info
 2. **PersistentVolume Script:** `generate-pv.sh` for creating PersistentVolumes.
 3. **Verification:** Confirm that all pods are running and the Redis cluster is properly initialized.
 
-## 📜 License
-
-This project is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for details.
-
-## 📞 Contact
-
-For questions or issues, please open an issue on the repository or contact [Your Name] at [Your Email Address].
-
-Good luck with your Redis cluster deployment! 🚀
-
